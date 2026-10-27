@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>JustJoin – People near you, plans for now</title>
+  <meta name="description" content="JustJoin shows you what’s going on near you right now, and you just join in: activities in your feed, group chats and QuickJoin for spontaneous meetups. Coming soon to iPhone and Android.">
+  <meta name="theme-color" content="#131313">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JustJoin – People near you, plans for now">
+  <meta property="og:description" content="See what’s going on near you and just join in.">
+  <meta property="og:url" content="https://jthofstetter.github.io/justjoin-website/">
+  <meta property="og:image" content="https://jthofstetter.github.io/justjoin-website/assets/img/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script>
+    document.documentElement.classList.replace('no-js', 'js');
+    // Preload fonts – not on file://, where browsers block preloads
+    if (location.protocol !== 'file:') {
+      ['inter-display-black-italic', 'inter-regular', 'inter-display-extrabold'].forEach(function (f) {
+        var l = document.createElement('link');
+        l.rel = 'preload'; l.as = 'font'; l.type = 'font/woff2'; l.crossOrigin = 'anonymous';
+        l.href = 'assets/fonts/' + f + '.woff2';
+        document.head.appendChild(l);
+      });
+    }
+  </script>
+  <script defer src="assets/js/app.js"></script>
+</head>
+<body>
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="mark-l" viewBox="0 0 100 53.45"><path d="M45.85 30.1L51.37 23.37C51.56 23.14 51.47 22.95 51.17 22.95L22.83 22.95C21.41 22.95 19.79 22.98 18.47 22.39C17.75 22.07 17.71 21.71 17.52 21.58C17.54 21.34 17.23 21.15 17.5 20.22C17.77 19.33 18.48 18.5 19.09 17.81C20.52 16.22 22.15 14.87 23.83 13.55C28.43 9.9 35.06 6.27 40.35 3.69C42.23 2.77 44.1 1.85 46 0.98C46.23 0.88 46.71 0.56 46.79 0.52C46.78 0.53 46.78 0.48 46.76 0.47C46.73 0.46 46.69 0.47 46.65 0.47C46.55 0.47 46.44 0.49 46.34 0.51C45.41 0.74 44.5 1.11 43.58 1.38C41.35 2.05 39.15 2.76 36.95 3.51C36.59 3.64 36.21 3.72 35.84 3.85C35.3 4.04 34.76 4.27 34.21 4.45C31.83 5.26 29.48 6.15 27.15 7.09C20.7 9.71 15 12.32 9.17 16.2C6.39 18.06 3.56 20.26 1.65 23.04C0.84 24.23 0.02 25.83 0.74 27.25C1.29 28.32 2.47 28.82 3.53 29.21C6.2 30.18 9.05 30.35 11.87 30.5C13.61 30.59 15.36 30.54 17.1 30.53L44.95 30.52C45.25 30.52 45.66 30.33 45.85 30.1Z"/></symbol>
+      <symbol id="mark-r" viewBox="0 0 100 53.45"><path d="M54.15 23.35L48.63 30.08C48.44 30.31 48.53 30.5 48.83 30.5L77.17 30.5C78.59 30.5 80.21 30.47 81.53 31.06C82.25 31.38 82.29 31.74 82.48 31.87C82.46 32.11 82.77 32.3 82.5 33.23C82.23 34.12 81.52 34.95 80.91 35.64C79.48 37.23 77.85 38.58 76.17 39.9C71.57 43.55 64.94 47.18 59.65 49.76C57.77 50.68 55.9 51.6 54 52.47C53.77 52.57 53.29 52.89 53.21 52.93C53.22 52.92 53.22 52.97 53.24 52.98C53.27 52.99 53.31 52.98 53.35 52.98C53.45 52.98 53.56 52.96 53.66 52.94C54.59 52.71 55.5 52.34 56.42 52.07C58.65 51.4 60.85 50.69 63.05 49.94C63.41 49.81 63.79 49.73 64.16 49.6C64.7 49.41 65.24 49.18 65.79 49C68.17 48.19 70.52 47.3 72.85 46.36C79.3 43.74 85 41.13 90.83 37.25C93.61 35.39 96.44 33.19 98.35 30.41C99.16 29.22 99.98 27.62 99.26 26.2C98.71 25.13 97.53 24.63 96.47 24.24C93.8 23.27 90.95 23.1 88.13 22.95C86.39 22.86 84.64 22.91 82.9 22.92L55.05 22.93C54.75 22.93 54.34 23.12 54.15 23.35Z"/></symbol>
+      <symbol id="mark" viewBox="0 0 100 53.45"><use href="#mark-l"/><use href="#mark-r"/></symbol>
+      <linearGradient id="slate-grad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#1E2430"/>
+        <stop offset=".5" stop-color="#3A4553"/>
+        <stop offset="1" stop-color="#1E2430"/>
+      </linearGradient>
+      <!-- Icons (Material Icons, Apache 2.0, see assets/icons/LICENSE-Material-Icons.txt), as in the app. i-hex is drawn for this site. -->
+      <symbol id="i-explore" viewBox="0 0 24 24"><path d="M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm2.19 12.19L6 18l3.81-8.19L18 6l-3.81 8.19z"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></symbol>
+      <symbol id="i-people" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></symbol>
+      <symbol id="i-filter" viewBox="0 0 24 24"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></symbol>
+      <symbol id="i-person" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></symbol>
+      <symbol id="i-back" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></symbol>
+      <symbol id="i-forward" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></symbol>
+      <symbol id="i-send" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></symbol>
+      <symbol id="i-image" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></symbol>
+      <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></symbol>
+      <symbol id="i-photos" viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></symbol>
+      <symbol id="i-person-add" viewBox="0 0 24 24"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></symbol>
+      <symbol id="i-exit" viewBox="0 0 24 24"><path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></symbol>
+      <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46A11.8 11.8 0 0 0 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/></symbol>
+      <symbol id="i-cake" viewBox="0 0 24 24"><path d="M12 6c1.11 0 2-.9 2-2 0-.38-.1-.73-.29-1.03L12 0l-1.71 2.97c-.19.3-.29.65-.29 1.03 0 1.1.9 2 2 2zm4.6 9.99l-1.07-1.07-1.08 1.07c-1.3 1.3-3.58 1.31-4.89 0l-1.07-1.07-1.09 1.07C6.75 16.64 5.88 17 4.96 17c-.73 0-1.4-.23-1.96-.61V21c0 .55.45 1 1 1h16c.55 0 1-.45 1-1v-4.61c-.56.38-1.23.61-1.96.61-.92 0-1.79-.36-2.44-1.01zM18 9h-5V7h-2v2H6c-1.66 0-3 1.34-3 3v1.54c0 1.08.88 1.96 1.96 1.96.52 0 1.02-.2 1.38-.57l2.14-2.13 2.13 2.13c.74.74 2.03.74 2.77 0l2.14-2.13 2.13 2.13c.37.37.86.57 1.38.57 1.08 0 1.96-.88 1.96-1.96V12C21 10.34 19.66 9 18 9z"/></symbol>
+      <symbol id="i-hex" viewBox="0 0 24 24"><path d="M7.2 3.5h9.6l4.8 8.5-4.8 8.5H7.2L2.4 12z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    </defs>
+  </svg>
+
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Loading screen: the two halves of the mark come together -->
+  <div class="loader" data-loader aria-hidden="true">
+    <div class="loader__center">
+      <div class="loader__mark">
+        <svg class="loader__half" data-loader-left viewBox="0 0 100 53.45"><use href="#mark-l"/></svg>
+        <svg class="loader__half" data-loader-right viewBox="0 0 100 53.45"><use href="#mark-r"/></svg>
+      </div>
+      <p class="loader__label"><span data-loader-label>Connecting</span></p>
+    </div>
+    <div class="loader__bar"><span data-loader-bar></span></div>
+  </div>
+
+  <header class="nav" data-nav>
+    <a class="nav__brand" href="#top" aria-label="JustJoin, back to top">
+      <svg class="nav__mark" viewBox="0 0 100 53.45" aria-hidden="true"><use href="#mark"/></svg>
+      <span class="nav__name">JustJoin</span>
+    </a>
+    <nav class="nav__links" aria-label="Main navigation">
+      <a href="#idea">Idea</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#quickjoin">QuickJoin</a>
+      <a href="#safety">Safety</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav__end">
+      <a class="btn btn--light btn--sm nav__cta" href="#waitlist" data-magnetic><span>Join the waitlist</span></a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
+        <span class="nav__toggle-label" data-menu-label>Menu</span>
+        <span class="nav__toggle-icon" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="menu" id="menu" data-menu hidden>
+    <nav aria-label="Menu">
+      <ul class="menu__list">
+        <li><a href="#idea">Idea</a></li>
+        <li><a href="#how-it-works">How it works</a></li>
+        <li><a href="#quickjoin">QuickJoin</a></li>
+        <li><a href="#safety">Safety</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#waitlist">Waitlist</a></li>
+      </ul>
+    </nav>
+    <p class="menu__foot">People near you. Plans for now.</p>
+  </div>
+
+  <!-- The city of hexes (WebGL). Fixed behind the hero and the waitlist. -->
+  <div class="city" data-city aria-hidden="true">
+    <canvas class="city__canvas" data-city-canvas></canvas>
+    <div class="city__fallback"></div>
+    <div class="city__labels" data-city-labels></div>
+    <div class="city__shade"></div>
+  </div>
+
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero" id="top" data-hero>
+      <h1 class="hero__title">
+        <span class="visually-hidden">JustJoin – find people near you and just join in</span>
+        <span class="mast" aria-hidden="true"><span class="mast__word" data-mast-a>Just</span> <span class="mast__word" data-mast-b>join.</span></span>
+      </h1>
+      <div class="hero__foot">
+        <p class="hero__lede" data-hero-lede>See what’s going on near you and just join in. Coffee, football, a study group: someone nearby has the same idea right now.</p>
+        <div class="hero__actions" data-hero-actions>
+          <a class="btn btn--light" href="#waitlist" data-magnetic><span>Join the waitlist</span></a>
+          <a class="btn btn--ghost" href="#how-it-works" data-magnetic><span>See how it works</span></a>
+        </div>
+      </div>
+      <div class="hero__cue" data-hero-cue aria-hidden="true"><i></i><span>Scroll</span></div>
+    </section>
+
+    <!-- IDEA -->
+    <section class="manifest" id="idea" aria-labelledby="idea-title">
+      <h2 class="visually-hidden" id="idea-title">The idea</h2>
+      <div class="manifest__inner wrap">
+        <svg class="manifest__mark" viewBox="0 0 100 53.45" aria-hidden="true"><use href="#mark"/></svg>
+        <p class="manifest__text" data-manifest>Most plans don’t fall apart over the idea. They fall apart over who’s coming. JustJoin shows you what’s happening around you right now and who wants in. You don’t have to know anyone. You just have to join.</p>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS: four steps, one phone -->
+    <section class="tour" id="how-it-works" data-tour aria-labelledby="tour-title">
+      <div class="tour__stage">
+        <div class="tour__copy">
+          <h2 class="h2 tour__title" id="tour-title">How it works.</h2>
+          <ol class="tour__steps">
+            <li class="tstep is-active" data-step>
+              <button class="tstep__head" type="button" aria-pressed="true" data-step-btn>
+                <span class="tstep__num" aria-hidden="true">1</span>
+                <span class="tstep__title">Discover</span>
+              </button>
+              <div class="tstep__body">
+                <p>Your feed shows what’s planned around you. You set the radius yourself, and filters for date, time and keywords do the rest.</p>
+              </div>
+            </li>
+            <li class="tstep" data-step>
+              <button class="tstep__head" type="button" aria-pressed="false" data-step-btn>
+                <span class="tstep__num" aria-hidden="true">2</span>
+                <span class="tstep__title">Join</span>
+              </button>
+              <div class="tstep__body">
+                <p>One tap and you’re in. Before you join, you see who’s organizing, when and where it starts, the age range and how many spots are left.</p>
+              </div>
+            </li>
+            <li class="tstep" data-step>
+              <button class="tstep__head" type="button" aria-pressed="false" data-step-btn>
+                <span class="tstep__num" aria-hidden="true">3</span>
+                <span class="tstep__title">Coordinate</span>
+              </button>
+              <div class="tstep__body">
+                <p>Every activity has its own group chat. Sort out where to meet, and if you’re running late, give everyone a heads-up.</p>
+              </div>
+            </li>
+            <li class="tstep" data-step>
+              <button class="tstep__head" type="button" aria-pressed="false" data-step-btn>
+                <span class="tstep__num" aria-hidden="true">4</span>
+                <span class="tstep__title">Start your own</span>
+              </button>
+              <div class="tstep__body">
+                <p>Nothing that fits? Create your own activity, public for everyone or private for your friends, and invite people right away.</p>
+              </div>
+            </li>
+          </ol>
+          <div class="tour__progress" aria-hidden="true"><span data-tour-progress></span></div>
+        </div>
+
+        <div class="tour__device">
+          <div class="phone" role="img" aria-label="App preview: a feed of activities, an activity with its join button, a group chat, and creating an activity">
+            <div class="phone__frame">
+              <div class="phone__screen">
+                <div class="phone__status" aria-hidden="true">
+                  <span>9:41</span>
+                  <span class="phone__island"></span>
+                  <span class="phone__icons">
+                    <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx=".6"/><rect x="5" y="5.5" width="3" height="6.5" rx=".6"/><rect x="10" y="3" width="3" height="9" rx=".6"/><rect x="15" y="0" width="3" height="12" rx=".6"/></svg>
+                    <svg viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="currentColor" opacity=".5"/><rect x="2" y="2" width="17" height="8" rx="1.8"/><rect x="23.5" y="4" width="1.8" height="4" rx=".8" opacity=".5"/></svg>
+                  </span>
+                </div>
+
+                <!-- Screen 1: Feed -->
+                <div class="screen scr-feed is-active" data-screen aria-hidden="true">
+                  <div class="app-top">
+                    <span class="app-ibtn"><svg><use href="#i-filter"/></svg></span>
+                    <span class="app-range">
+                      <span class="app-range__track"><i data-range-fill></i><b data-range-knob></b></span>
+                      <span class="app-range__val"><span data-range-km>10</span>&nbsp;km</span>
+                    </span>
+                    <span class="app-avatar"><svg><use href="#i-person"/></svg><i></i></span>
+                  </div>
+                  <p class="app-label">Featured tonight</p>
+                  <div class="feat" data-rise>
+                    <img src="assets/img/act-walk.webp" alt="" width="960" height="540">
+                    <span class="feat__chip">Nearby</span>
+                    <p class="feat__title">Coffee walk through the old town</p>
+                    <p class="feat__meta"><span><svg><use href="#i-clock"/></svg>19:00</span><span><svg><use href="#i-pin"/></svg>Museumsquartier</span></p>
+                  </div>
+                  <p class="app-label">Activity Feed</p>
+                  <div class="acard" data-rise>
+                    <div class="acard__img"><img src="assets/img/act-sports.webp" alt="" width="960" height="540"><span class="acard__badge">Active</span></div>
+                    <div class="acard__body">
+                      <p class="acard__title">Football in the Augarten</p>
+                      <span class="acard__go"><svg><use href="#i-forward"/></svg></span>
+                      <p class="acard__meta"><span><svg><use href="#i-people"/></svg>8 / 12 Participants</span><span><svg><use href="#i-clock"/></svg>18:30</span></p>
+                      <p class="acard__meta"><span><svg><use href="#i-pin"/></svg>Augarten</span></p>
+                    </div>
+                  </div>
+                  <div class="acard" data-rise>
+                    <div class="acard__img"><img src="assets/img/act-coffee.webp" alt="" width="960" height="540"></div>
+                    <div class="acard__body">
+                      <p class="acard__title">Coffee &amp; chat</p>
+                      <span class="acard__go"><svg><use href="#i-forward"/></svg></span>
+                    </div>
+                  </div>
+                  <span class="app-fab"><svg><use href="#i-plus"/></svg></span>
+                  <span class="app-nav">
+                    <span class="is-on"><svg><use href="#i-explore"/></svg></span>
+                    <span><svg><use href="#i-search"/></svg></span>
+                    <span><svg><use href="#i-people"/></svg></span>
+                    <span><svg><use href="#i-chat"/></svg></span>
+                  </span>
+                </div>
+
+                <!-- Screen 2: details and join -->
+                <div class="screen scr-detail" data-screen aria-hidden="true">
+                  <div class="app-top app-top--detail">
+                    <span class="app-ibtn"><svg><use href="#i-back"/></svg></span>
+                    <svg class="app-jj" viewBox="0 0 100 53.45"><use href="#mark"/></svg>
+                    <span class="app-avatar"><svg><use href="#i-person"/></svg></span>
+                  </div>
+                  <div class="det-img"><img src="assets/img/act-coffee.webp" alt="" width="960" height="540"></div>
+                  <p class="det-title">Coffee &amp; chat</p>
+                  <span class="det-pill"><span><span data-det-count>5</span> / 8</span><svg><use href="#i-people"/></svg></span>
+                  <div class="det-org"><span class="app-avatar app-avatar--org">L</span><span><small>Organized by</small><b>Lena M.</b></span></div>
+                  <div class="det-tiles">
+                    <div class="det-tile"><svg><use href="#i-pin"/></svg><small>Location</small><b>Karmelitermarkt</b></div>
+                    <div class="det-tile"><svg><use href="#i-calendar"/></svg><small>Date</small><b>Today</b></div>
+                    <div class="det-tile"><svg><use href="#i-clock"/></svg><small>Time</small><b>17:00</b></div>
+                    <div class="det-tile"><svg><use href="#i-people"/></svg><small>Age range</small><b>18–30</b></div>
+                  </div>
+                  <div class="det-toast" data-det-toast><svg><use href="#i-check"/></svg>You’re in</div>
+                  <span class="det-join" data-det-join>
+                    <span class="det-join__a">Join Activity</span>
+                    <span class="det-join__b"><svg><use href="#i-chat"/></svg>Group chat</span>
+                    <i class="det-join__ripple" data-det-ripple></i>
+                  </span>
+                </div>
+
+                <!-- Screen 3: group chat -->
+                <div class="screen scr-chat" data-screen aria-hidden="true">
+                  <div class="chat-top">
+                    <span class="app-ibtn"><svg><use href="#i-back"/></svg></span>
+                    <span class="chat-top__img"><img src="assets/img/act-coffee.webp" alt="" width="960" height="540"></span>
+                    <span class="chat-top__t"><b>Coffee &amp; chat</b><small>6 Participants</small></span>
+                  </div>
+                  <div class="chat-log">
+                    <p class="chat-sys" data-msg>You joined the activity</p>
+                    <div class="msg" data-msg><span class="msg__av">L</span><div class="msg__b"><p class="msg__n">Lena <em>Creator</em></p><p>Welcome! We’re at the stall with the green awning.</p></div></div>
+                    <div class="msg" data-msg><span class="msg__av msg__av--2">J</span><div class="msg__b"><p class="msg__n">Jonas</p><p>Be there in ten minutes.</p></div></div>
+                    <div class="msg" data-msg><span class="msg__av msg__av--3">M</span><div class="msg__b"><p class="msg__n">Mia</p><p>I’m bringing a friend, is that okay?</p></div></div>
+                    <div class="msg" data-msg><span class="msg__av">L</span><div class="msg__b"><p class="msg__n">Lena <em>Creator</em></p><p>Sure, there are two spots left.</p></div></div>
+                    <div class="msg msg--me" data-msg><div class="msg__b"><p>Great, see you soon!</p><small>16:42</small></div></div>
+                    <div class="chat-typing" data-chat-typing><i></i><i></i><i></i></div>
+                  </div>
+                  <div class="chat-input"><span>Message</span><span class="chat-send"><svg><use href="#i-send"/></svg></span></div>
+                </div>
+
+                <!-- Screen 4: create an activity -->
+                <div class="screen scr-create" data-screen aria-hidden="true">
+                  <div class="app-top app-top--title">
+                    <span class="app-ibtn"><svg><use href="#i-back"/></svg></span>
+                    <b>Create activity</b>
+                  </div>
+                  <div class="cr-img"><img src="assets/img/act-walk.webp" alt="" width="960" height="540"><span><svg><use href="#i-image"/></svg>Image selected</span></div>
+                  <p class="cr-label">Activity name</p>
+                  <p class="cr-field"><span data-cr-name>Sunset at Kahlenberg</span><i class="cr-caret" data-cr-caret></i></p>
+                  <p class="cr-label">Visibility</p>
+                  <div class="cr-seg" data-cr-seg><i class="cr-seg__ind"></i><span><svg><use href="#i-people"/></svg>Public</span><span><svg><use href="#i-lock"/></svg>Private</span></div>
+                  <p class="cr-label">Location</p>
+                  <p class="cr-field cr-field--loc"><span>Kahlenberg, Vienna</span><em data-cr-loc><svg><use href="#i-check"/></svg>Confirmed</em></p>
+                  <div class="cr-row">
+                    <div><p class="cr-label">Start</p><p class="cr-field">Today, 18:30</p></div>
+                    <div><p class="cr-label">End</p><p class="cr-field">21:00</p></div>
+                  </div>
+                  <p class="cr-label">Age</p>
+                  <p class="cr-field">18–35</p>
+                  <span class="cr-next" data-cr-next>Next</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICKJOIN -->
+    <section class="qj" id="quickjoin" data-qj aria-labelledby="qj-title">
+      <div class="wrap">
+        <header class="qj__head">
+          <h2 class="h2" id="qj-title">No plan? QuickJoin.</h2>
+          <p class="qj__intro">The map around you is split into hexes. Wherever people are up to something, the hex lights up. Tap it, join the group and use the live chat to agree where to meet.</p>
+        </header>
+
+        <div class="qj__demo">
+          <div class="qj__stage">
+          <div class="qj__map" data-qj-map>
+            <div class="qj__chips" role="group" aria-label="Filter by intent">
+              <button type="button" class="chip" data-intent="all" aria-pressed="true">All</button>
+              <button type="button" class="chip" data-intent="coffee" aria-pressed="false">Coffee</button>
+              <button type="button" class="chip" data-intent="walk" aria-pressed="false">Walk</button>
+              <button type="button" class="chip" data-intent="food" aria-pressed="false">Food</button>
+              <button type="button" class="chip" data-intent="sport" aria-pressed="false">Sport</button>
+              <button type="button" class="chip" data-intent="study" aria-pressed="false">Study</button>
+              <button type="button" class="chip" data-intent="chill" aria-pressed="false">Chill</button>
+            </div>
+            <svg class="qj__svg" data-qj-svg role="group" aria-label="Map of hexes around your location" preserveAspectRatio="xMidYMid slice"></svg>
+          </div>
+          <div class="qj__sheet" data-qj-sheet aria-live="polite"></div>
+          </div>
+          <ul class="qj__legend" aria-label="Legend">
+            <li><i class="lg-you"></i>You</li>
+            <li><i class="lg-active"></i>Hex with people, the number shows how many</li>
+            <li><i class="lg-reach"></i>Your range for joining</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Shards: busy? The hex splits -->
+      <div class="shards" data-shards>
+        <div class="shards__stage">
+          <div class="shards__art">
+            <svg viewBox="0 0 600 600" class="shards__svg" data-shards-svg role="img" aria-label="A hex splits into seven shards, each with its own group"></svg>
+          </div>
+          <div class="shards__copy">
+            <h3 class="h3">Busy? The hex splits.</h3>
+            <p>Zoom in and a hex breaks into seven shards. Each shard has its own people and its own chat. That keeps groups small, even when the area is packed.</p>
+            <ul class="shards__notes">
+              <li>You’re only ever in one group. Switching takes one tap.</li>
+              <li>You can only join hexes near you.</li>
+            </ul>
+            <p class="shards__caption" data-shards-caption><svg aria-hidden="true"><use href="#i-chat"/></svg>Your shard: four people, one chat.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MORE -->
+    <section class="more" id="more" aria-labelledby="more-title">
+      <div class="wrap more__inner">
+        <header class="more__head">
+          <h2 class="h2" id="more-title">More than a meetup.</h2>
+          <p class="more__intro">One activity often leads to the next. JustJoin helps you stay in touch with the people you’ve met.</p>
+        </header>
+        <ul class="more__list">
+          <li class="feat-item">
+            <svg aria-hidden="true"><use href="#i-person-add"/></svg>
+            <h3>Friends</h3>
+            <p>Find people by name or @username, send friend requests and keep track of your network.</p>
+          </li>
+          <li class="feat-item">
+            <svg aria-hidden="true"><use href="#i-photos"/></svg>
+            <h3>Profile with photos</h3>
+            <p>Show what you’ve been up to and tag who was there. Your status shows whether you’re active right now.</p>
+          </li>
+          <li class="feat-item">
+            <svg aria-hidden="true"><use href="#i-image"/></svg>
+            <h3>Memories</h3>
+            <p>Every activity leaves an archive: a public gallery and a private collection. Only people who were there can add photos.</p>
+          </li>
+          <li class="feat-item">
+            <svg aria-hidden="true"><use href="#i-chat"/></svg>
+            <h3>Chats</h3>
+            <p>Direct, in groups or per activity. Share an activity to any chat with one tap.</p>
+          </li>
+          <li class="feat-item">
+            <svg aria-hidden="true"><use href="#i-bell"/></svg>
+            <h3>Notifications</h3>
+            <p>New messages and invites arrive as push notifications, even when the app is closed.</p>
+          </li>
+          <li class="feat-item">
+            <svg aria-hidden="true"><use href="#i-palette"/></svg>
+            <h3>Your look</h3>
+            <p>Classic in black and white, or Red with a red accent. The app is available in English and German.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SAFETY -->
+    <section class="trust" id="safety" aria-labelledby="trust-title">
+      <svg class="trust__mark" viewBox="0 0 100 53.45" aria-hidden="true"><use href="#mark" fill="url(#slate-grad)"/></svg>
+      <div class="wrap trust__inner">
+        <header class="trust__head">
+          <h2 class="h2" id="trust-title">You decide who’s in.</h2>
+          <p class="trust__intro">Whoever starts an activity sets the rules. And you decide what others get to see about you.</p>
+        </header>
+        <ul class="trust__list">
+          <li><svg aria-hidden="true"><use href="#i-cake"/></svg><h3>Age range</h3><p>Every activity has an age range, for example 18 to 30.</p></li>
+          <li><svg aria-hidden="true"><use href="#i-people"/></svg><h3>Limited spots</h3><p>The organizer decides how many people can join.</p></li>
+          <li><svg aria-hidden="true"><use href="#i-lock"/></svg><h3>Public or private</h3><p>Private activities are only for friends you invite.</p></li>
+          <li><svg aria-hidden="true"><use href="#i-eye-off"/></svg><h3>Private profile</h3><p>If you like, only your friends can see your photos, friends and past activities.</p></li>
+          <li><svg aria-hidden="true"><use href="#i-hex"/></svg><h3>No exact location</h3><p>In QuickJoin, others only see the hex you’re in, not your exact position.</p></li>
+          <li><svg aria-hidden="true"><use href="#i-exit"/></svg><h3>Leave anytime</h3><p>You can leave activities, groups and hexes at any time, and delete your account right in the settings.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq" aria-labelledby="faq-title" data-faq>
+      <div class="wrap faq__inner">
+        <h2 class="h2 faq__title" id="faq-title">Questions and answers.</h2>
+        <div class="faq__list">
+          <details class="qa">
+            <summary><span>Do I need to know people already?</span><i aria-hidden="true"></i></summary>
+            <div class="qa__a"><p>No. That’s exactly what JustJoin is for. You see what’s happening near you and join in, even if you don’t know anyone there yet.</p></div>
+          </details>
+          <details class="qa">
+            <summary><span>What’s the difference between an activity and QuickJoin?</span><i aria-hidden="true"></i></summary>
+            <div class="qa__a"><p>An activity is planned, with a place, a time and a description. QuickJoin is spontaneous: you join the people in your hex who are up to something right now and sort out the details in the live chat.</p></div>
+          </details>
+          <details class="qa">
+            <summary><span>Can others see exactly where I am?</span><i aria-hidden="true"></i></summary>
+            <div class="qa__a"><p>No. In QuickJoin, your location is matched to a hex. Others see the hex and how many people are in it, but not your exact position.</p></div>
+          </details>
+          <details class="qa">
+            <summary><span>Which phones will JustJoin run on?</span><i aria-hidden="true"></i></summary>
+            <div class="qa__a"><p>iPhone and Android. Both apps are being built right now.</p></div>
+          </details>
+          <details class="qa">
+            <summary><span>When can I download the app?</span><i aria-hidden="true"></i></summary>
+            <div class="qa__a"><p>As soon as it’s ready. Join the waitlist and you’ll be the first to know.</p></div>
+          </details>
+          <details class="qa">
+            <summary><span>Can I delete my account?</span><i aria-hidden="true"></i></summary>
+            <div class="qa__a"><p>Yes, at any time. You’ll find it in the settings under Account &amp; Privacy.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- WAITLIST: the city comes back -->
+    <section class="wait" id="waitlist" aria-labelledby="wait-title" data-wait>
+      <div class="wrap wait__inner">
+        <h2 class="wait__title" id="wait-title">Be there from day one.</h2>
+        <p class="wait__text">JustJoin is coming to iPhone and Android. Sign up and we’ll let you know as soon as you can download the app.</p>
+
+        <form class="form" data-form novalidate>
+          <div class="form__row">
+            <div class="field">
+              <label class="field__label" for="email">Email address</label>
+              <input class="field__input" id="email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@example.com" aria-describedby="form-error">
+            </div>
+            <div class="field field--city">
+              <label class="field__label" for="city">City <span>(optional)</span></label>
+              <input class="field__input" id="city" name="city" type="text" autocomplete="address-level2" placeholder="e.g. Vienna">
+            </div>
+          </div>
+          <fieldset class="form__platform">
+            <legend class="visually-hidden">Your phone (optional)</legend>
+            <span class="form__platform-label" aria-hidden="true">Your phone <span>(optional)</span></span>
+            <label class="seg"><input type="radio" name="platform" value="ios"><span>iPhone</span></label>
+            <label class="seg"><input type="radio" name="platform" value="android"><span>Android</span></label>
+          </fieldset>
+          <div class="form__actions">
+            <button class="btn btn--light btn--lg" type="submit" data-magnetic><span>Join the waitlist</span></button>
+            <p class="form__note">We’ll only email you about the launch. Unsubscribe anytime. <a href="#" data-todo="privacy">Privacy policy</a></p>
+          </div>
+          <p class="form__error" id="form-error" role="alert" data-form-error></p>
+        </form>
+
+        <div class="form__done" data-form-done role="status" hidden>
+          <p class="form__done-title">You’re on the list.</p>
+          <p class="form__done-text">We’ll be in touch as soon as JustJoin launches. Your hex is already glowing.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot__top">
+        <p class="foot__claim">People near you.<br>Plans for now.</p>
+        <nav class="foot__nav" aria-label="Social media">
+          <a href="#" data-todo="instagram">Instagram</a>
+          <a href="#" data-todo="tiktok">TikTok</a>
+        </nav>
+        <nav class="foot__nav" aria-label="Legal">
+          <a href="#" data-todo="legal-notice">Legal notice</a>
+          <a href="#" data-todo="privacy">Privacy policy</a>
+          <a href="#" data-todo="contact">Contact</a>
+        </nav>
+      </div>
+      <p class="foot__mast" aria-hidden="true">JustJoin</p>
+      <div class="foot__base">
+        <p>© 2026 JustJoin</p>
+        <a href="#top" class="foot__up">Back to top</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
